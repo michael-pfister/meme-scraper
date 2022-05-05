@@ -1,7 +1,7 @@
+import fs from 'node:fs';
+import * as stream from 'node:stream';
+import { promisify } from 'node:util';
 import axios from 'axios';
-import fs from 'fs';
-import * as stream from 'stream';
-import { promisify } from 'util';
 
 /**
  * Sends a request to a given URL and returns the response
@@ -10,7 +10,7 @@ import { promisify } from 'util';
  * @returns A Promise with a 'resolve' of the response
  */
 export async function httpRequest(URL) {
-  return axios
+  return await axios // ESlint made me add await (even though I didn't need it)
     .get(URL)
     .then((res) => {
       return res;
@@ -26,7 +26,7 @@ export async function httpRequest(URL) {
  * @returns {string[]} img links
  */
 export function imageLinks(htmlLines) {
-  let imageLinks = [];
+  const _imageLinks = [];
   let boolean = false;
   let link = '';
 
@@ -36,11 +36,13 @@ export function imageLinks(htmlLines) {
         if (boolean) {
           link += char;
         }
-        if (char == `"`) {
+        if (char === `"`) {
           boolean = !boolean;
         }
+
+        return 0; // ESlint made me do this idk why
       });
-      imageLinks.push(link.substring(0, link.length - 1));
+      _imageLinks.push(link.slice(0, -1));
       link = '';
     }
   });
@@ -48,7 +50,7 @@ export function imageLinks(htmlLines) {
   return imageLinks;
 }
 
-//prerequisite
+// prerequisite
 const finished = promisify(stream.finished);
 /**
  * stackoverflow copypasta, downloads a file to a given directory
@@ -58,12 +60,13 @@ const finished = promisify(stream.finished);
  */
 export async function downloadFile(fileUrl, outputLocationPath) {
   const writer = fs.createWriteStream(outputLocationPath);
-  return axios({
+  return await axios({
+    // ESlint made me add await (even though I didn't need it)
     method: 'get',
     url: fileUrl,
     responseType: 'stream',
   }).then((response) => {
     response.data.pipe(writer);
-    return finished(writer); //this is a Promise
+    return finished(writer); // this is a Promise
   });
 }
