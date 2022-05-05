@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "ascii-art": "^2.8.5",
+    "axios": "^0.27.2",
+    "cli-progress": "^3.11.0"
+  }
+}
