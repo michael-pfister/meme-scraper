@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import * as stream from 'node:stream';
+import stream from 'node:stream';
 import { promisify } from 'node:util';
 import axios from 'axios';
 
@@ -9,8 +9,8 @@ import axios from 'axios';
  * @param {string} URL
  * @returns A Promise with a 'resolve' of the response
  */
-export async function httpRequest(URL) {
-  return await axios // ESlint made me add await (even though I didn't need it)
+export function httpRequest(URL) {
+  return axios
     .get(URL)
     .then((res) => {
       return res;
@@ -32,22 +32,21 @@ export function imageLinks(htmlLines) {
 
   htmlLines.forEach((element) => {
     if (element.includes(`<img src="`)) {
-      element.split('').map((char) => {
+      for (const char of element.split('')) {
         if (boolean) {
           link += char;
         }
         if (char === `"`) {
           boolean = !boolean;
         }
+      }
 
-        return 0; // ESlint made me do this idk why
-      });
       _imageLinks.push(link.slice(0, -1));
       link = '';
     }
   });
 
-  return imageLinks;
+  return _imageLinks;
 }
 
 // prerequisite
@@ -58,10 +57,9 @@ const finished = promisify(stream.finished);
  * @param {string} fileUrl
  * @param {string} outputLocationPath
  */
-export async function downloadFile(fileUrl, outputLocationPath) {
+export function downloadFile(fileUrl, outputLocationPath) {
   const writer = fs.createWriteStream(outputLocationPath);
-  return await axios({
-    // ESlint made me add await (even though I didn't need it)
+  return axios({
     method: 'get',
     url: fileUrl,
     responseType: 'stream',
