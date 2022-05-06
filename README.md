@@ -48,4 +48,4 @@ $ node index.js it works bender
 
 ```
 
-![image of bender smoking a cigar stating that it works!](https://drive.google.com/file/d/1AyH1v7a1gRBvDYEL5ccsqEiOIz92T1H9/view?usp=sharing)
+![image of bender smoking a cigar stating that it works!](https://github.com/stracciatella27/meme-scraper/blob/main/example.jpg)
