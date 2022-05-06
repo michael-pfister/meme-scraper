@@ -4,6 +4,11 @@
 
 This program downloads the first 10 images from https://memegen-link-examples-upleveled.netlify.app/, but you can also generate memes with this code by passing some arguments.
 
+### Prerequisites
+
+- ./images/ folder in project root (/meme-scraper)
+- ./node_modules/ folder in project root (/meme-scraper), containing dependencies
+
 ## How to use this Program
 
 - execute index.js for the program to download 10 random meme images, they will be stored under ./images/00-09.jpg
