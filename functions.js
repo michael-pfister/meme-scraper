@@ -31,9 +31,7 @@ export function imageLinks(htmlLines) {
   let link = '';
 
   htmlLines.forEach((element) => {
-    // console.log(element);
     if (element.includes(`src="https://api.memegen.link/images/`)) {
-      // console.log(element);
       for (const char of element.split('')) {
         if (boolean) {
           link += char;
